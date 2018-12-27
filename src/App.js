@@ -6,7 +6,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      a: '', b: '', c: '', d: '', 
+      a: '', b: '', c: '', d: '', val: 0,
     }
   }
 
@@ -19,14 +19,23 @@ class App extends React.Component {
     });
   }
 
+  update = () => {
+    this.setState(prevState => {
+      return { val: prevState.val + 1 }
+    });
+  }
+
   componentWillMount() {
     console.log('componentWillMount');
+    this.setState({m: 2});
   }
   componentDidMount() {
     console.log('componentDidMount');
+    this.inc = setInterval(this.update, 500);
   }
   componentWillUnmount() {
     console.log('componentWillMount');
+    clearInterval(this.inc);
   }
 
   render() {
@@ -34,6 +43,9 @@ class App extends React.Component {
     return (
       <div>
         <Title text="TITLE"/>
+        <Button onClick={this.update}>
+          {this.state.val * this.state.m} 
+        </Button>
         <input
           ref="a"
           value={this.state.a}
@@ -60,6 +72,17 @@ class App extends React.Component {
       </div>
     );
   }
+}
+
+const Button = (props) => {
+  return (
+    <button
+      onClick={props.onClick}
+      style={{marginBottom: '20px', display: 'block'}}
+    >
+      {props.children}
+    </button>
+  );
 }
 
 const Title = props => <h1>{props.text}</h1>;
