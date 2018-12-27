@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import Wrapper from './App';
 
 ReactDOM.render(
-  <App text="this is the value"/>,
+  <Wrapper />,
   document.getElementById('root')
 );
