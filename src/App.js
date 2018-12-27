@@ -2,13 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      a: '', b: '', c: '', d: '', val: 0,
-    }
+  state = {
+    a: '', b: '', c: '', d: '', val: 0,
   }
-
+ 
   onTextChange = () => {
     this.setState({
       a: this.refs.a.value,

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import Fetch from './Fetch';
 
 class Wrapper extends React.Component {
   state = { increasing: false }
@@ -41,6 +42,7 @@ class Wrapper extends React.Component {
         <button onClick={this.mount}>Mount</button>
         <button onClick={this.unmount}>UnMount</button>
         <div id="a"></div>
+        <Fetch />
       </div>
     );
   }
