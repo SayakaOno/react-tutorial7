@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import Fetch from './Fetch';
 import Hoc from './Hoc';
+import Buttons from './Buttons';
 
 class Wrapper extends React.Component {
   state = { increasing: false }
@@ -44,6 +45,11 @@ class Wrapper extends React.Component {
         <button onClick={this.unmount}>UnMount</button>
         <div id="a"></div>
         <Hoc />
+        <Buttons>
+          <button value="A">A</button>
+          <button value="B">B</button>
+          <button value="C">C</button>
+        </Buttons>
         <Fetch />
       </div>
     );
