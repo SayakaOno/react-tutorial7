@@ -19,7 +19,18 @@ class App extends React.Component {
     });
   }
 
+  componentWillMount() {
+    console.log('componentWillMount');
+  }
+  componentDidMount() {
+    console.log('componentDidMount');
+  }
+  componentWillUnmount() {
+    console.log('componentWillMount');
+  }
+
   render() {
+    console.log('rendering');
     return (
       <div>
         <Title text="TITLE"/>
@@ -83,10 +94,28 @@ Title.propTypes = {
     if (!(propName in props)) {
       return new Error(`missing ${propName}`);
     }
-    if (props[propName].length < 6) {
+    if (props[propName].length > 6) {
       return new Error(`${propName} was too short`);
     }
   }
 }
 
-export default App;
+class Wrapper extends React.Component {
+  mount = () => {
+    ReactDOM.render(<App />, document.getElementById('a'));
+  }
+  unmount = () => {
+    ReactDOM.unmountComponentAtNode(document.getElementById('a'));
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={this.mount}>Mount</button>
+        <button onClick={this.unmount}>UnMount</button>
+        <div id="a"></div>
+      </div>
+    );
+  }
+}
+
+export default Wrapper;
