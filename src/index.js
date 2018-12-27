@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Wrapper from './App';
+import Wrapper from './Wrapper';
 
 ReactDOM.render(
   <Wrapper />,

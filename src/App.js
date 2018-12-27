@@ -41,10 +41,10 @@ class App extends React.Component {
     console.log('rendering');
     return (
       <div>
-        <Title text={this.props.text}/>
         <Button onClick={this.update}>
           {this.state.val * this.state.m} 
         </Button>
+        <Title text={this.props.text}/>
         <input
           ref="a"
           value={this.state.a}
@@ -84,7 +84,18 @@ const Button = (props) => {
   );
 }
 
-const Title = props => <h1>{props.text}</h1>;
+const Title = props => <h2>{props.text}</h2>;
+
+Title.propTypes = {
+  text(props, propName, component) {
+    if (!(propName in props)) {
+      return new Error(`missing ${propName}`);
+    }
+    if (props[propName].length < 6) {
+      return new Error(`${propName} was too short`);
+    }
+  }
+}
 
 class Input extends React.Component {
   render() {
@@ -113,59 +124,4 @@ class Input2 extends React.Component {
   }
 }
 
-Title.propTypes = {
-  text(props, propName, component) {
-    if (!(propName in props)) {
-      return new Error(`missing ${propName}`);
-    }
-    if (props[propName].length < 6) {
-      return new Error(`${propName} was too short`);
-    }
-  }
-}
-
-class Wrapper extends React.Component {
-  state = { increasing: false }
-
-  mount = () => {
-    ReactDOM.render(<App text="this is the title" />, document.getElementById('a'));
-  }
-  unmount = () => {
-    ReactDOM.unmountComponentAtNode(document.getElementById('a'));
-  }
-  update = () => {
-    ReactDOM.render(
-      <Wrapper value={this.props.value+1} />,
-      document.getElementById('root')
-    );
-  }
-  componentWillReceiveProps(nextProps) {
-    console.log('next', nextProps)
-    console.log('current', this.props.value)
-    this.setState({increasing: nextProps.value > this.props.value})
-  }
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.value % 5 === 0;
-  }
-  componentDidUpdate(prevProps, prevState) {
-    console.log('componentDidUpdate', `prevProps: ${prevProps.value}`);
-  }
-
-  render() {  
-    console.log(this.state.increasing)
-    return (
-      <div>
-        <button onClick={this.update}>
-          {this.props.value}
-        </button><br />
-        <button onClick={this.mount}>Mount</button>
-        <button onClick={this.unmount}>UnMount</button>
-        <div id="a"></div>
-      </div>
-    );
-  }
-}
-
-Wrapper.defaultProps = {value: 0}
-
-export default Wrapper;
+export default App;
