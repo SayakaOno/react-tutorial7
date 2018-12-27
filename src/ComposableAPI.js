@@ -5,9 +5,13 @@ import PropTypes from 'prop-types';
 class ComposableAPI extends React.Component {
   state = {red: 0, blue: 0}
 
-  update = (ref) => {
+  red = React.createRef();
+  blue = React.createRef();
+
+  update = (e, ref) => {
+    let value = e.target.value;
     this.setState(() => {
-      return {[ref]: ReactDOM.findDOMNode(this.refs[ref].refs.input).value};
+      return {[ref.current.props.label.toLowerCase()]: value}
     });
   }
   render() {
@@ -15,23 +19,23 @@ class ComposableAPI extends React.Component {
       <div>
         <h2>ComposableAPI</h2>
         <NumInput
-          ref="red"
+          ref={this.red}
           min={0}
           max={255}
           step={1}
           value={+this.state.red}
           label="Red"
-          update={() => this.update("red")}
+          update={(e) => this.update(e, this.red)}
         />
         <NumInput
-          ref="blue"
+          ref={this.blue}
           type="number"
           min={0}
           max={255}
           step={10}
           value={+this.state.blue}
           label="Blue"
-          update={() => this.update("blue")}
+          update={(e) => this.update(e, this.blue)}
         />
       </div>
     )

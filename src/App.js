@@ -5,10 +5,12 @@ class App extends React.Component {
   state = {
     a: '', b: '', c: '', d: '', val: 0,
   }
+
+  a = React.createRef();
  
   onTextChange = () => {
     this.setState({
-      a: this.refs.a.value,
+      a: this.a.current.value,
       b: this.b.value,
       c: ReactDOM.findDOMNode(this.c).value,
       d: this.d.refs.input.value,
@@ -43,7 +45,7 @@ class App extends React.Component {
         </Button>
         <Title text={this.props.text}/>
         <input
-          ref="a"
+          ref={this.a}
           value={this.state.a}
           onChange={this.onTextChange}       
         />{this.state.a}
