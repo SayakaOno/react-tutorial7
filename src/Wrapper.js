@@ -4,6 +4,7 @@ import App from './App';
 import Fetch from './Fetch';
 import Hoc from './Hoc';
 import Buttons from './Buttons';
+import ComposableAPI from './ComposableAPI';
 
 class Wrapper extends React.Component {
   state = { increasing: false }
@@ -50,6 +51,7 @@ class Wrapper extends React.Component {
           <button value="B">B</button>
           <button value="C">C</button>
         </Buttons>
+        <ComposableAPI />
         <Fetch />
       </div>
     );
