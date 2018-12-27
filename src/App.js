@@ -22,6 +22,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <Title text="TITLE"/>
         <input
           ref="a"
           value={this.state.a}
@@ -50,6 +51,8 @@ class App extends React.Component {
   }
 }
 
+const Title = props => <h1>{props.text}</h1>;
+
 class Input extends React.Component {
   render() {
     return (
@@ -75,9 +78,15 @@ class Input2 extends React.Component {
   }
 }
 
-App.propTypes = {
-  a: PropTypes.string,
-  b: PropTypes.number
+Title.propTypes = {
+  text(props, propName, component) {
+    if (!(propName in props)) {
+      return new Error(`missing ${propName}`);
+    }
+    if (props[propName].length < 6) {
+      return new Error(`${propName} was too short`);
+    }
+  }
 }
 
 export default App;
