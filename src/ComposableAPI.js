@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 
 class ComposableAPI extends React.Component {
@@ -50,7 +49,6 @@ class NumInput extends React.Component {
     return (
       <div>
         <input
-          ref="input"
           type={this.props.type}
           min={this.props.min}
           max={this.props.max}

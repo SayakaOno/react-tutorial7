@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import Wrapper from './Wrapper';
 
 ReactDOM.render(
-  <Wrapper />,
+  <React.StrictMode>
+    <Wrapper />
+  </React.StrictMode>,
   document.getElementById('root')
 );

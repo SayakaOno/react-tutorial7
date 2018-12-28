@@ -3,8 +3,8 @@ import React from 'react';
 const HOC = InnerComponent => class extends React.Component {
   state = { count : 0 };
 
-  componentWillMount = () => {
-    console.log('componentWillMount from HOC');
+  componentDidMount = () => {
+    console.log('componentDidMount from HOC');
   }
   update = () => {
     this.setState(prevState => { return { count: prevState.count+1 } });
@@ -40,8 +40,8 @@ const Button = HOC(props => {
 });
 
 class Label extends React.Component {
-  componentWillMount = () => {
-    console.log('componentWillMount from Label');
+  componentDidMount = () => {
+    console.log('componentDidMount from Label');
   }
   
   render() {

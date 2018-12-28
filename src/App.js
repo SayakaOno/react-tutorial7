@@ -7,13 +7,15 @@ class App extends React.Component {
   }
 
   a = React.createRef();
+  c = React.createRef();
+  d = React.createRef();
  
   onTextChange = () => {
     this.setState({
       a: this.a.current.value,
       b: this.b.value,
-      c: ReactDOM.findDOMNode(this.c).value,
-      d: this.d.refs.input.value,
+      c: this.c.current.value,
+      d: this.d.current.value,
     });
   }
 
@@ -22,11 +24,7 @@ class App extends React.Component {
       return { val: prevState.val + 1 }
     });
   }
-
-  componentWillMount() {
-    console.log('componentWillMount');
-    this.setState({m: 2});
-  }
+  
   componentDidMount() {
     console.log('componentDidMount');
     this.inc = setInterval(this.update, 500);
@@ -41,7 +39,7 @@ class App extends React.Component {
     return (
       <div>
         <Button onClick={this.update}>
-          {this.state.val * this.state.m} 
+          {this.state.val} 
         </Button>
         <Title text={this.props.text}/>
         <input
@@ -57,13 +55,13 @@ class App extends React.Component {
         />{this.state.b}
         <hr />
         <Input
-          ref={ component => this.c = component }
+          ref={this.c}
           value={this.state.c}
           onChange={this.onTextChange}       
         />{this.state.c}
         <hr />
         <Input2
-          ref={ component => this.d = component }
+          ref={this.d}
           value={this.state.d}
           onChange={this.onTextChange}       
         />{this.state.d}
@@ -96,31 +94,26 @@ Title.propTypes = {
   }
 }
 
-class Input extends React.Component {
-  render() {
-    return (
-      <>
-        <input
-            value={this.props.value}
-            onChange={this.props.onChange}       
-        />
-      </>
-    );
-  }
-}
+const Input = React.forwardRef((props, ref) => {
+  return (
+    <input
+      ref={ref}
+      value={props.value}
+      onChange={props.onChange}       
+    />
+  );
+});
 
-class Input2 extends React.Component {
-  render() {
-    return (
-      <div>
-        <input
-          ref="input"
-          value={this.props.value}
-          onChange={this.props.onChange}       
-        />
-      </div>
-    );
-  }
-}
+const Input2 = React.forwardRef((props, ref) => {
+  return (
+    <div>
+      <input
+        ref={ref}
+        value={props.value}
+        onChange={props.onChange}       
+      />
+    </div>
+  );
+});
 
 export default App;

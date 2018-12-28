@@ -10,7 +10,12 @@ class Wrapper extends React.Component {
   state = { increasing: false }
 
   mount = () => {
-    ReactDOM.render(<App text={"Refs & Validation"} />, document.getElementById('a'));
+    ReactDOM.render(
+      <React.StrictMode>
+        <App text={"Refs & Validation"} />
+      </React.StrictMode>,
+      document.getElementById('a')
+    );
   }
   unmount = () => {
     ReactDOM.unmountComponentAtNode(document.getElementById('a'));
@@ -21,11 +26,13 @@ class Wrapper extends React.Component {
       document.getElementById('root')
     );
   }
-  componentWillReceiveProps(nextProps) {
-    console.log('next', nextProps)
-    console.log('current', this.props.value)
-    this.setState({increasing: nextProps.value > this.props.value})
-  }
+  
+  //UNSAFE
+  // componentWillReceiveProps(nextProps) {
+  //   console.log('next', nextProps)
+  //   console.log('current', this.props.value)
+  //   this.setState({increasing: nextProps.value > this.props.value})
+  // }
   shouldComponentUpdate(nextProps, nextState) {
     return nextProps.value % 5 === 0;
   }

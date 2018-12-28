@@ -3,7 +3,7 @@ import React from 'react';
 class Fetch extends React.Component {
   state = {items: []};
 
-  componentWillMount() {
+  componentDidMount() {
     fetch ( 'https://ghibliapi.herokuapp.com/films')
       .then( response => response.json() )
       .then( result => this.setState({items: result}))
